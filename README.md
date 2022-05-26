@@ -1,6 +1,6 @@
 # rp // redis proxy
 
-A multithreaded HTTP Redis proxy server w/ a local Least Recently Used (LRU) Cache.
+A multithreaded HTTP Redis proxy server w/ a local Least Recently Used (LRU) cache.
 
 ## High-level architecture overview
 
