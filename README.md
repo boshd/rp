@@ -1,18 +1,18 @@
 # rp // redis proxy
 
-A simple HTTP Redis Proxy Server w/ a local Least Recently Used (LRU) Cache.
+A multithreaded HTTP Redis proxy server w/ a local Least Recently Used (LRU) Cache.
 
 ## High-level architecture overview
 
 There are three major components to the system: Redis backing instance, LRU Cache and HTTP Server.
 
-- Redis: The Redis instance serves as a key-value data store. In our case, it is used to retrieve data if the data is not available in our LRU cache.
+- **Redis**: The Redis instance serves as a key-value data store. In our case, it is used to retrieve data if the data is not available in our LRU cache.
 
-- LRU Cache: This is a local cache built using the Least Recently Used (LRU) algorithm. The cache has a pair of configurable env. vars: capacity and expiry duration:
+- **LRU Cache**: This is a local cache built using the Least Recently Used (LRU) algorithm. The cache has a pair of configurable env. vars: capacity and expiry duration:
     - Capacity: Maximum number of items that can be held by the local cache.
     - Expiry duration: Maximum amount of time an item can stay in the cache before it expires. This happens whenever a get operation is invoked, otherwise it stays unexpired.
 
-- HTTP Server: This is a simple HTTP Server using the Base HTTPServer `class Server(ThreadingMixIn, HTTPServer)` class: . It has two request handlers: `do_GET` and `do_POST`.
+- **HTTP Server**: This is a simple HTTP Server using the Base HTTPServer `class Server(ThreadingMixIn, HTTPServer)` class: . It has two request handlers: `do_GET` and `do_POST`.
 
   - `do_GET`: Handles requests from the following paths:
     - `GET /` -- returns if server is up.
@@ -48,7 +48,7 @@ The code is split up into five major components: **lru_cache**, **proxy**, **red
   - Creates and starts a new server instance which includes a proxy instance inside it. This class glues together all the components and runs them in unison (minus redis instance, which is run separately using the docker scripts).
 
 - **tests**
-  - main_test.py
+  - **main_test.py**
     - This runs the end-to-end tests using the python requests library to communicate with the proxy.
 
 ## Algorithmic complexity
