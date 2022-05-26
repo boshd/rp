@@ -6,16 +6,13 @@ A simple HTTP Redis Proxy Server w/ a local Least Recently Used (LRU) Cache.
 
 There are three major components to the system: Redis backing instance, LRU Cache and HTTP Server.
 
-- Redis
-The Redis instance serves as a key-value data store. In our case, it is used to retrieve data if the data is not available in our LRU cache.
+- Redis: The Redis instance serves as a key-value data store. In our case, it is used to retrieve data if the data is not available in our LRU cache.
 
-- LRU Cache
-This is a local cache built using the Least Recently Used (LRU) algorithm. The cache has a pair of configurable env. vars: capacity and expiry duration:
+- LRU Cache: This is a local cache built using the Least Recently Used (LRU) algorithm. The cache has a pair of configurable env. vars: capacity and expiry duration:
     - Capacity: Maximum number of items that can be held by the local cache.
     - Expiry duration: Maximum amount of time an item can stay in the cache before it expires. This happens whenever a get operation is invoked, otherwise it stays unexpired.
 
-- HTTP Server
-This is a simple HTTP Server using the Base HTTPServer `class Server(ThreadingMixIn, HTTPServer)` class: . It has two request handlers: `do_GET` and `do_POST`.
+- HTTP Server: This is a simple HTTP Server using the Base HTTPServer `class Server(ThreadingMixIn, HTTPServer)` class: . It has two request handlers: `do_GET` and `do_POST`.
 
   - `do_GET`: Handles requests from the following paths:
     - `GET /` -- returns if server is up.
@@ -37,14 +34,14 @@ The code is split up into five major components: **lru_cache**, **proxy**, **red
     - This is a test class for the LRU Cache. It tests out: get, put, existence, expiry and capacity.
 
 - **proxy**
-  - proxy.py
+  - **proxy.py**
     - This class glues together the local LRU Cache and Redis client. It also handles the retrieval of data from the cache (if available) or from the Redis backing instance.
 
 - **redis_client**
-  - redis_client.py
+  - **redis_client.py**
     - This is a simple Redis client class that connects to the Redis backing instance using a pre-installed redis client library. It safely accesses the **set** and **get** methods.
 
-  - redis_test.py:
+  - **redis_test.py**
     - Runs basic get, put and existence tests on the redis backing instance.
 
 - **main.py**
