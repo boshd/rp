@@ -6,7 +6,7 @@ A multithreaded HTTP Redis proxy server w/ a local Least Recently Used (LRU) cac
 
 There are three major components to the system: **Redis backing instance**, **LRU Cache** and **HTTP Server**.
 
-- **Redis**: The Redis instance serves as a key-value data store. In our case, it is used to retrieve data if the data is not available in our LRU cache.
+- **Redis**: The Redis instance serves as a stand-alone in-memory key-value data store. In our case, it is used to retrieve data if the data is not available in our LRU cache.
 
 - **LRU Cache**: This is a local cache built using the Least Recently Used (LRU) algorithm. The cache has a pair of configurable env. vars: capacity and expiry duration:
     - Capacity: Maximum number of items that can be held by the local cache.
@@ -20,7 +20,7 @@ There are three major components to the system: **Redis backing instance**, **LR
     - `GET /randompath` -- returns 'Resource not found' when an invalid path is entered.
 
   - **Multithreading**
-    The server is built with the ability to handle requests in seperate threads. This is done through the use of the `ThreadingMixIn` mix-in class which allows the server to undertake parallel processing of `GET` requests.
+    The server is built with the ability to handle requests in seperate threads. This is done through the use of the `ThreadingMixIn` mix-in class which allows the server to undertake parallel processing of incoming `GET` requests.
 
 ## What the code does
 
@@ -45,7 +45,7 @@ The code is split up into five major components: **lru_cache**, **proxy**, **red
     - Runs basic get, put and existence tests on the redis backing instance.
 
 - **main.py**
-  - Creates and starts a new server instance which includes a proxy instance inside it. This class glues together all the components and runs them in unison (minus redis instance, which is run separately using the docker scripts).
+  - Creates and starts a new server instance which includes a proxy instance. This class glues together all the components and runs them in unison (minus redis instance, which is run separately using the docker scripts).
 
 - **tests**
   - **main_test.py**
@@ -86,11 +86,11 @@ $ make test
 
 ## Testing
 
-The current tests run on the env. vars shown below, otherwise they would break. This is a point of improvement for the future.
+The current tests run on the env. vars shown below, otherwise they would break. Room for improvement here.
 
 ## Configuration
 
-There are a number of configurable parameters in this system, controlled by the following Environment Variables stored in the .env file in the root directory:
+There are a number of configurable parameters in this system, controlled by the following environment variables stored in the .env file in the root directory:
 
 ```
 HOST_NAME="0.0.0.0"
