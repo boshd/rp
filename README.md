@@ -6,18 +6,21 @@ A simple HTTP Redis Proxy Server w/ a local Least Recently Used (LRU) Cache.
 
 There are three major components to the system: Redis backing instance, LRU Cache and HTTP Server.
 
-- **Redis**: The Redis instance serves as a key-value data store. In our case, it is used to retrieve data if the data is not available in our LRU cache.
+- Redis
+The Redis instance serves as a key-value data store. In our case, it is used to retrieve data if the data is not available in our LRU cache.
 
-- **LRU Cache**: This is a local cache built using the Least Recently Used (LRU) algorithm. The cache has a pair of configurable env. vars: capacity and expiry duration:
+- LRU Cache
+This is a local cache built using the Least Recently Used (LRU) algorithm. The cache has a pair of configurable env. vars: capacity and expiry duration:
     - Capacity: Maximum number of items that can be held by the local cache.
     - Expiry duration: Maximum amount of time an item can stay in the cache before it expires. This happens whenever a get operation is invoked, otherwise it stays unexpired.
 
-- **HTTP Server**: This is a simple HTTP Server using the Base HTTPServer `class Server(ThreadingMixIn, HTTPServer)` class: . It has two request handlers: do_GET and do_POST.
+- HTTP Server
+This is a simple HTTP Server using the Base HTTPServer `class Server(ThreadingMixIn, HTTPServer)` class: . It has two request handlers: `do_GET` and `do_POST`.
 
-    - **do_GET**: Handles requests from the following paths:
-        - `GET /` -- returns if server is up.
-        - `GET /get/{key}` -- returns value for key if it exists or an 'key not found' message if it doesn't.
-        - `GET /randompath` -- returns 'Resource not found' when an invalid path is entered.
+  - `do_GET`: Handles requests from the following paths:
+    - `GET /` -- returns if server is up.
+    - `GET /get/{key}` -- returns value for key if it exists or an 'key not found' message if it doesn't.
+    - `GET /randompath` -- returns 'Resource not found' when an invalid path is entered.
 
   - **Multithreading**
     The server is built with the ability to handle requests in seperate threads. This is done through the use of the `ThreadingMixIn` mix-in class which allows the server to undertake parallel processing of `GET` requests.
@@ -27,10 +30,10 @@ There are three major components to the system: Redis backing instance, LRU Cach
 The code is split up into five major components: **lru_cache**, **proxy**, **redis_client**, **main** and **tests**. The following breakdown intuitively follows the directory tree structure:
 
 - **lru_cache**
-  - cache.py
+  - **cache.py**
     - This is where the LRU Cache implementation lives. It uses a dictionary and an OrderedDict as a base of storing data and maintaining key access recency, respectively. OrderedDict objects are built on top of Doubly Linked-List data structures, which offers a significant time complexity boost over arrays (more on this in the Algorithmic Complexity section below).
 
-  - cache_test.py
+  - **cache_test.py**
     - This is a test class for the LRU Cache. It tests out: get, put, existence, expiry and capacity.
 
 - **proxy**
@@ -54,7 +57,7 @@ The code is split up into five major components: **lru_cache**, **proxy**, **red
 ## Algorithmic complexity
 
 #### Proxy
-A GET /get/{key} operation is O(1) for both the local lru cache and Redis instances. Therefore, the overall complexity for a GET operation within the proxy is O(1).
+A `GET /get/{key}` operation is *O(1)* for both the local lru cache and Redis instances. Therefore, the overall complexity for a `GET` operation within the proxy is *O(1)*.
 
 #### LRU Cache
 - **Time complexity**
