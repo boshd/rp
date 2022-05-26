@@ -1,4 +1,4 @@
-# redis proxy
+# rp // redis proxy
 
 A simple HTTP Redis Proxy Server w/ a local Least Recently Used (LRU) Cache.
 
@@ -68,7 +68,7 @@ A `GET /get/{key}` operation is *O(1)* for both the local lru cache and Redis in
 ## Usage
 
 ```
-$ git clone ...
+$ git clone https://github.com/boshd/rp.git
 $ cd rp
 
 # builds redis a proxy server (ps) containers.
