@@ -4,7 +4,7 @@ A multithreaded HTTP Redis proxy server w/ a local Least Recently Used (LRU) cac
 
 ## High-level architecture overview
 
-There are three major components to the system: Redis backing instance, LRU Cache and HTTP Server.
+There are three major components to the system: **Redis backing instance**, **LRU Cache** and **HTTP Server**.
 
 - **Redis**: The Redis instance serves as a key-value data store. In our case, it is used to retrieve data if the data is not available in our LRU cache.
 
