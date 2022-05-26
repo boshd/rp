@@ -1,0 +1,30 @@
+version: '3.6'
+services:
+  redis:
+    image: redis:alpine
+    hostname: redis
+    container_name: redis
+    build:
+      context: .
+      dockerfile: Dockerfile-redis
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+
+  ps:
+    image: ps:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-ps
+    container_name: ps
+    environment:
+      - HOST_NAME=${HOST_NAME}
+      - SEVER_PORT=${SEVER_PORT}
+      - RECORD_CAPACITY=${RECORD_CAPACITY}
+      - RECORD_EXPIRY=${RECORD_EXPIRY}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_DB=${REDIS_DB}
+    depends_on:
+      - redis
+    ports:
+      - "${SEVER_PORT}:${SEVER_PORT}"

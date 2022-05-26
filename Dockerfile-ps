@@ -1,0 +1,12 @@
+FROM python:latest
+
+WORKDIR /usr/ps/src
+
+COPY ./src /usr/ps/src/
+COPY ./requirements.txt /usr/ps/src/
+
+RUN pip3 install -r ./requirements.txt
+
+EXPOSE ${SERVER_PORT}
+
+CMD [ "python3", "-u", "main.py"]

@@ -1,0 +1,5 @@
+/target
+.pytest_cache
+.pytest*
+dump.rdb
+.vscode

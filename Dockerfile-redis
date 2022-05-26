@@ -1,0 +1,5 @@
+FROM redis:latest
+
+WORKDIR /usr/local/etc/redis
+
+EXPOSE ${REDIS_PORT}
