@@ -68,13 +68,13 @@ A `GET /get/{key}` operation is *O(1)* for both the local lru cache and Redis in
 $ git clone https://github.com/boshd/rp.git
 $ cd rp
 
-# builds redis a proxy server (ps) containers.
+# builds redis and proxy server (ps) containers.
 $ make build
 
-# runs redis a proxy server (ps) containers.
+# runs redis and proxy server (ps) containers.
 $ make run
 
-# stops redis a proxy server (ps) containers.
+# stops redis and proxy server (ps) containers.
 $ make stop
 
 # runs make stop, make build and make run.
