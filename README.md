@@ -102,17 +102,7 @@ REDIS_PORT=6379
 REDIS_DB=0
 ```
 
-## Time spent on each component
-
-- LRU Cache: **2 hrs**
-- Redis Client: **30 mins**
-- HTTP Server: **2 hrs**
-- Proxy: **1 hr**
-- Tests: **2 hrs**
-- Containerization + config: **2 hrs**
-- Total: **9.5 hrs**
-
-## Not implemented
+## Future work
 - Configurable concurrent client limit
 - Redis client protocol
 
